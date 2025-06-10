@@ -1,7 +1,7 @@
-## 🔗 Demo Links - https://task-manager-web-app-seven.vercel.app/login
+## 🔗 Demo Links - https://task-manager-web-app-seven.vercel.app/
 # 🚀 Live Task Manager Web App
 
-**Frontend (Vercel): [https://your-frontend-deploy.vercel.app](https://task-manager-web-app-seven.vercel.app))  
+**Frontend (Vercel): [https://your-frontend-deploy.vercel.app] (https://task-manager-web-app-seven.vercel.app/)
 Backend (Render): [https://task-manager-backend-p0ky.onrender.com](https://task-manager-backend-p0ky.onrender.com)**
 
 ---
