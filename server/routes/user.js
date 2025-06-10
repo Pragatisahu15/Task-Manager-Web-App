@@ -30,7 +30,7 @@ if (!(await user.matchPassword(password))) {
 // Get total users count
 router.get('/count', async (req, res) => {
   try {
-    const User = require('../models/User'); // Only if not at the top!
+    const User = require('../models/User'); 
     const count = await User.countDocuments();
     res.json({ count });
   } catch (err) {

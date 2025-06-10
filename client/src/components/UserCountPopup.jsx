@@ -40,11 +40,6 @@ const UserCountNotification = () => {
   if (userCount === null) return null;
 
   return (
-    // <div style={notificationStyle}>
-    //   {userCount > 10
-    //     ? <>🚀 <b>{userCount}+</b> active users using Task Manager!</>
-    //     : <>👥 <b>{userCount}</b> active users online</>}
-    // </div>
     
   <div style={notificationStyle}>
     <IoPeople /> &nbsp;

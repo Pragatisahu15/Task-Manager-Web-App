@@ -21,7 +21,7 @@ const TaskList = ({ token }) => {
 };
  useEffect(() => {
   fetchTasks();
-}, [token]); // re-run when token changes (e.g., on newly logged in)
+}, [token]); 
 
   const handleDelete = async (id) => {
     await axios.delete(`${API}/${id}`, { headers: { Authorization: `Bearer ${token}` } });

@@ -7,7 +7,7 @@ const Auth = ({ onAuth }) => {
   const [isLogin, setIsLogin] = useState(true);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-  const navigate = useNavigate(); // ✅ Moved inside component
+  const navigate = useNavigate(); 
 
   // Reset form and error on mode change
   useEffect(() => {
