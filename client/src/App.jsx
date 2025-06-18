@@ -25,7 +25,7 @@ function App() {
         <UserCountPopup />
         <Routes>
           <Route path="/login" element={<Auth onAuth={handleAuth} />} />
-          <Route path="/" element={token ? <TaskList /> : <Navigate to="/login" />} />
+          <Route path="/" element={token ? <TaskList token={token} /> : <Navigate to="/login" />} />
         </Routes>
       </div>
     </BrowserRouter>
