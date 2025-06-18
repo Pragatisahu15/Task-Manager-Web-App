@@ -5,29 +5,10 @@ require('dotenv').config();
 
 const userRoutes = require('./routes/user');
 const taskRoutes = require('./routes/task');
-
 const app = express();
 
-// CORS configuration
-const allowedOrigins = [
-  "https://task-manager-web-app-seven.vercel.app",  // your Vercel frontend URL (no trailing slash)
-  "http://localhost:5173"                            // your local frontend (during development)
-];
-
-app.use(cors({
-  origin: function (origin, callback) {
-    // allow requests with no origin (like mobile apps, curl, Postman, etc.)
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.indexOf(origin) === -1) {
-      const msg = `The CORS policy for this site does not allow access from the specified Origin: ${origin}`;
-      return callback(new Error(msg), false);
-    }
-    return callback(null, true);
-  },
-  credentials: true
-}));
-
 app.use(express.json());
+app.use(cors());
 
 // Routes
 app.use('/api/users', userRoutes);

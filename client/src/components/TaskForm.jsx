@@ -4,27 +4,35 @@ import axios from 'axios';
 const API = `${import.meta.env.VITE_API_BASE}/tasks`;
 const init = { title: "", description: "", status: "Pending", dueDate: "" };
 
-const TaskForm = ({ token, onSuccess, editTask, setEditTask }) => {
+const TaskForm = ({ onSuccess, editTask, setEditTask }) => {
   const [task, setTask] = useState(init);
+  const token = localStorage.getItem('token');  // ✅ Directly get token from localStorage
 
   useEffect(() => {
-    if (editTask) setTask({
-      ...editTask,
-      dueDate: editTask.dueDate ? editTask.dueDate.slice(0, 10) : ""
-    });
-    else setTask(init);
+    if (editTask) {
+      setTask({
+        ...editTask,
+        dueDate: editTask.dueDate ? editTask.dueDate.slice(0, 10) : ""
+      });
+    } else {
+      setTask(init);
+    }
   }, [editTask]);
 
-  const handleChange = e => setTask({ ...task, [e.target.name]: e.target.value });
+  const handleChange = (e) => setTask({ ...task, [e.target.name]: e.target.value });
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       if (editTask) {
-        await axios.put(`${API}/${editTask._id}`, task, { headers: { Authorization: `Bearer ${token}` } });
+        await axios.put(`${API}/${editTask._id}`, task, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
         setEditTask(null);
       } else {
-   await axios.post(API, task, { headers: { Authorization: `Bearer ${token}` } });
+        await axios.post(API, task, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
       }
       setTask(init);
       onSuccess();

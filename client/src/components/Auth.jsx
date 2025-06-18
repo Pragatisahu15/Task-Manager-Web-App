@@ -32,6 +32,7 @@ const Auth = ({ onAuth }) => {
       const res = await axios.post(`${import.meta.env.VITE_API_BASE}/users/${endpoint}`, form);
 
       if (isLogin) {
+        localStorage.setItem('token', res.data.token); 
         onAuth(res.data.token);
         setError('');
         setSuccess('');

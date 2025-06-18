@@ -4,24 +4,34 @@ import TaskForm from './TaskForm.jsx';
 
 const API = `${import.meta.env.VITE_API_BASE}/tasks`;
 
-const TaskList = ({ token }) => {
+const TaskList = () => {
   const [tasks, setTasks] = useState([]);
   const [editTask, setEditTask] = useState(null);
+  const [token, setToken] = useState(null);
 
- const fetchTasks = async () => {
-  try {
-    const res = await axios.get(`${import.meta.env.VITE_API_BASE}/tasks`, {
-      headers: { Authorization: `Bearer ${token}` }
-    });
-    console.log("TASKS RETURNED FROM BACKEND:", res.data);
-    setTasks(res.data);
-  } catch (e) {
-    console.error("Error fetching tasks:", e);
-  }
-};
- useEffect(() => {
-  fetchTasks();
-}, [token]); 
+  useEffect(() => {
+    const storedToken = localStorage.getItem('token');
+    if (storedToken) {
+      setToken(storedToken);
+    }
+  }, []);
+
+  const fetchTasks = async () => {
+    if (!token) return;  // Only fetch if token is available
+    try {
+      const res = await axios.get(`${API}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      console.log("TASKS RETURNED FROM BACKEND:", res.data);
+      setTasks(res.data);
+    } catch (e) {
+      console.error("Error fetching tasks:", e);
+    }
+  };
+
+  useEffect(() => {
+    fetchTasks();
+  }, [token]);
 
   const handleDelete = async (id) => {
     await axios.delete(`${API}/${id}`, { headers: { Authorization: `Bearer ${token}` } });
@@ -38,7 +48,7 @@ const TaskList = ({ token }) => {
             <b>{task.title}</b> ({task.status}) - Due: {task.dueDate && task.dueDate.slice(0,10)}
             <br />
             {task.description}
-<button style={{ marginRight: '0.5rem' }} onClick={() => setEditTask(task)}>Edit</button>
+            <button style={{ marginRight: '0.5rem' }} onClick={() => setEditTask(task)}>Edit</button>
             <button onClick={() => handleDelete(task._id)}>Delete</button>
           </li>
         )}
